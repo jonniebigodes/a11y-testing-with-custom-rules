@@ -27,6 +27,35 @@ const breakpointViewports = Object.keys(breakpoints).reduce(
 
 const preview: Preview = {
   parameters: {
+    // Adds custom rule to check text length
+    a11y: {
+      element: "body",
+      config: {
+        rules: [
+          {
+            id: "custom-text-length",
+            selector: "p, span, div, h1, h2, h3, h4, h5, h6, li, td, th, label, button, a",
+            impact: "critical",
+            all: ["text-minimum-text"],
+             metadata: {
+              description: "Ensures text elements have appropriate length",
+              help: "Text elements should not have more than 5 characters",
+            },
+          }
+        ],
+        checks: [
+          {
+            id: "text-minimum-text",
+            evaluate: function evaluate(node: HTMLElement) {
+              const textContent = node.textContent?.trim();
+              return textContent && textContent.length > 0
+                ? textContent.length <= 5
+                : true;
+            },
+          },
+        ],
+      }
+    },
     viewport: {
       viewports: {
         ...breakpointViewports,
