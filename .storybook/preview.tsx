@@ -27,6 +27,40 @@ const breakpointViewports = Object.keys(breakpoints).reduce(
 
 const preview: Preview = {
   parameters: {
+    // Adds custom rule to check if headings contain text meow
+    a11y: {
+      config: {
+        checks: [
+          {
+            id: 'heading-custom-rule',
+            evaluate: function evaluate(node: HTMLElement) {
+              const textContent = node.textContent?.trim()
+              return textContent && textContent.length > 0 ? textContent.includes('meow') : true
+            },
+            metadata: {
+              impact: 'critical',
+              messages: {
+                pass: 'Headings contains text meow',
+                fail: 'Headings should contain text meow',
+              },
+            },
+          },
+        ],
+        rules: [
+          {
+            id: 'custom-heading-rule',
+            metadata: {
+              description: 'Ensures that headings contain text meow',
+              help: 'Headings should contain text meow',
+            },
+            enabled: true,
+            selector: 'h1, h2, h3, h4, h5, h6',
+            impact: 'critical',
+            any: ['heading-custom-rule'],
+          },
+        ],
+      },
+    },
     viewport: {
       viewports: {
         ...breakpointViewports,
@@ -69,6 +103,6 @@ const preview: Preview = {
 
   decorators: globalDecorators,
   loaders: [mswLoader],
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 export default preview
