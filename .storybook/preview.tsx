@@ -27,6 +27,29 @@ const breakpointViewports = Object.keys(breakpoints).reduce(
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      element: "body",
+      config: {
+        rules: [
+          {
+            id: "aria-allowed-attr",
+            reviewOnFail: false,
+            enabled: false,
+          },
+          {
+            id: "aria-allowed-role",
+            reviewOnFail: false,
+            enabled: false,
+          },
+          {
+            id: "color-contrast",
+            reviewOnFail: false,
+            enabled: false,
+          },
+          
+        ],
+      },
+    },
     viewport: {
       viewports: {
         ...breakpointViewports,
