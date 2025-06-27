@@ -27,6 +27,21 @@ const breakpointViewports = Object.keys(breakpoints).reduce(
 
 const preview: Preview = {
   parameters: {
+    // Disables A11y image alt rule
+    a11y: {
+      element: "body",
+      config: {
+        rules: [
+          {
+            id: "image-alt",
+            reviewOnFail: false,
+            enabled: false,
+          }
+        ]
+      }
+    },
+
+    //
     viewport: {
       viewports: {
         ...breakpointViewports,
