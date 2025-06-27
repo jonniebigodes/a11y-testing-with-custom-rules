@@ -27,7 +27,7 @@ export const HeaderContainer = styled.div<{ sticky: boolean }>(
     top: 0;
     left: 0;
     position: sticky;
-    background: red;
+    background: ${color.headerBackground};
     z-index: 2;
     width: 100%;
     padding: 0 1.5rem;
