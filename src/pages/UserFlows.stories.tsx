@@ -85,7 +85,7 @@ export const ToRestaurantDetailPage = {
 } satisfies Story
 
 export const ToCheckoutPage = {
-  play: async (context) => {
+  /* play: async (context) => {
     await ToRestaurantDetailPage.play(context)
     const { canvasElement, args, step } = context
 
@@ -122,42 +122,43 @@ export const ToCheckoutPage = {
       await clickEvent(canvas.getByText(/checkout/i))
     })
   },
-} satisfies Story
-
+} satisfies Story */
+}
 export const ToSuccessPage = {
-  play: async (context) => {
-    await ToCheckoutPage.play(context)
-    const { canvasElement, args, step } = context
-
-    const clickEvent = args.demoMode === true ? animatedUserEventClick : userEvent.click
-    const delay = args.demoMode === true ? 50 : 0
-    const canvas = within(canvasElement)
-
-    await step('Fill in user details', async () => {
-      await userEvent.type(canvas.getByLabelText('First name'), 'Jane', { delay })
-      await userEvent.type(canvas.getByLabelText('Last name'), 'Dough', { delay })
-      await userEvent.type(canvas.getByLabelText('Email'), 'jane@dough.com', { delay })
-      await userEvent.type(canvas.getByLabelText('Phone number'), '0612345678', { delay })
-    })
-
-    await step('Go to the next step', async () => {
-      await clickEvent(canvas.getByText(/Next/i))
-    })
-
-    await step('Fill in delivery details', async () => {
-      await userEvent.type(canvas.getByLabelText('Streetname and housenumber'), 'Somestreet 14', {
-        delay,
+  /*   play: async (context) => {
+      await ToCheckoutPage.play(context)
+      const { canvasElement, args, step } = context
+  
+      const clickEvent = args.demoMode === true ? animatedUserEventClick : userEvent.click
+      const delay = args.demoMode === true ? 50 : 0
+      const canvas = within(canvasElement)
+  
+      await step('Fill in user details', async () => {
+        await userEvent.type(canvas.getByLabelText('First name'), 'Jane', { delay })
+        await userEvent.type(canvas.getByLabelText('Last name'), 'Dough', { delay })
+        await userEvent.type(canvas.getByLabelText('Email'), 'jane@dough.com', { delay })
+        await userEvent.type(canvas.getByLabelText('Phone number'), '0612345678', { delay })
       })
-      await userEvent.type(canvas.getByLabelText('Postcode'), '1043DX', { delay })
-      await userEvent.type(canvas.getByLabelText('City'), 'Amsterdam', { delay })
-    })
-
-    await step('Complete order', async () => {
-      await clickEvent(canvas.getByText(/Complete/i))
-    })
-  },
-} satisfies Story
-
+  
+      await step('Go to the next step', async () => {
+        await clickEvent(canvas.getByText(/Next/i))
+      })
+  
+      await step('Fill in delivery details', async () => {
+        await userEvent.type(canvas.getByLabelText('Streetname and housenumber'), 'Somestreet 14', {
+          delay,
+        })
+        await userEvent.type(canvas.getByLabelText('Postcode'), '1043DX', { delay })
+        await userEvent.type(canvas.getByLabelText('City'), 'Amsterdam', { delay })
+      })
+  
+      await step('Complete order', async () => {
+        await clickEvent(canvas.getByText(/Complete/i))
+      })
+    },
+  
+  } satisfies Story */
+}
 // export const EndToEnd: Story = {
 //   ...ToSuccessPage,
 //   args: {

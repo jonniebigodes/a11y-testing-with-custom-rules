@@ -71,6 +71,7 @@ export const Select = ({
       value={value}
       onChange={(evt: any) => onChange && onChange(Number(evt.target.value))}
       {...otherProps}
+      role="article"
     >
       {options.map((option) => (
         <option key={option} value={option}>
@@ -78,10 +79,6 @@ export const Select = ({
         </option>
       ))}
     </select>
-    {label && (
-      <Body type="label" htmlFor={id}>
-        {label}
-      </Body>
-    )}
+    {label && <Body type="label">{label}</Body>}
   </Container>
 )

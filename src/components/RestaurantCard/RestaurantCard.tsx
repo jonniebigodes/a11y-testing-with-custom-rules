@@ -29,13 +29,16 @@ const Container = styled.div(
     &:hover {
       opacity: 0.9;
     }
+    &:focus {
+      outline: none;
+    }
   `
 )
 
 const StyledContent = styled.div(
   ({ theme: { color } }) => css`
     padding: 24px;
-    background: ${color.cardBackground};
+    background: red;
     border-radius: 0px 0px 8px 8px;
     .review-text {
       color: ${color.reviewText};
@@ -53,7 +56,7 @@ const NewTag = styled.span(
   }) => css`
     position: absolute;
     padding: 8px;
-    background: ${color.newRestaurantTag};
+    background: green;
     display: inline-block;
     top: 0.5rem;
     left: 0.5rem;
@@ -78,7 +81,7 @@ const Closed = styled.div(
     text-align: center;
     z-index: 1;
     span {
-      color: ${color.white};
+      color: pink;
       line-height: 210px;
     }
   `
@@ -178,7 +181,7 @@ export const RestaurantCard = ({
             <Body type="span">This restaurant is closed.</Body>
           </Closed>
         )}
-        <RestaurantImage $isClosed={isClosed} loading="lazy" src={photoUrl} alt="restaurant" />
+        <RestaurantImage $isClosed={isClosed} loading="lazy" src={photoUrl} />
       </ImageContainer>
       <StyledContent>
         <StyledHeading level={2}>{name}</StyledHeading>
