@@ -27,6 +27,75 @@ const breakpointViewports = Object.keys(breakpoints).reduce(
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      config: {
+        checks: [
+          {
+            id: 'heading-custom-rule',
+            evaluate: function evaluate(node: HTMLElement) {
+              const textContent = node.textContent?.trim()
+              return textContent && textContent.length > 0 ? textContent.includes('meow') : true
+            },
+            metadata: {
+              impact: 'critical',
+              messages: {
+                pass: 'Headings contains text meow',
+                fail: 'Headings should contain text meow',
+              },
+            },
+          },
+          {
+            id: 'text-minimum-text',
+            evaluate: function evaluate(node: HTMLElement) {
+              const textContent = node.textContent?.trim()
+              return textContent && textContent.length > 0 ? textContent.length <= 5 : true
+            },
+          },
+          {
+            id: 'cat-link-rule',
+            evaluate: function evaluate(node: HTMLElement) {
+              const textContent = node.textContent?.trim()
+              return textContent && textContent.length > 0 ? textContent.includes('cat') : true
+            },
+          },
+        ],
+        rules: [
+          {
+            id: 'custom-heading-rule',
+            metadata: {
+              description: 'Ensures that headings contain text meow',
+              help: 'Headings should contain text meow',
+            },
+            enabled: true,
+            selector: 'h1, h2, h3, h4, h5, h6',
+            impact: 'critical',
+            any: ['heading-custom-rule'],
+          },
+          {
+            id: 'custom-text-length',
+            metadata: {
+              description: 'Ensures text elements have appropriate length',
+              help: 'Text elements should not have more than 5 characters',
+            },
+            enabled: true,
+            selector: 'p, span, div, h1, h2, h3, h4, h5, h6, li, td, th, label, button, a',
+            impact: 'critical',
+            any: ['text-minimum-text'],
+          },
+          {
+            id: 'custom-link-rule',
+            metadata: {
+              description: 'ensures that links should contain a cat reference',
+              help: 'Links should contain a cat reference',
+            },
+            enabled: true,
+            selector: 'a',
+            impact: 'critical',
+            any: ['cat-link-rule'],
+          },
+        ],
+      },
+    },
     viewport: {
       viewports: {
         ...breakpointViewports,
@@ -69,6 +138,6 @@ const preview: Preview = {
 
   decorators: globalDecorators,
   loaders: [mswLoader],
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 export default preview
